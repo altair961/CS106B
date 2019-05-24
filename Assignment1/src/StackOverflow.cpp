@@ -5,6 +5,9 @@
 #include "StackOverflow.h"
 using namespace std;
 
+// Answer: the recursion cycles with the numbers 137 164 685 203 327 549 137
+// and so it leads to the stack overflow exception
+
 /* The "Goto Table" for the Stack Overflow example. This is essentially a function
  * that given a number between 0 and 1023 gives back a number between 0 and 1023.
  * Our function uses this table to make it hard to predict what's going to happen
