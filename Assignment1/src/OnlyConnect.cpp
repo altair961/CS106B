@@ -31,53 +31,6 @@ string onlyConnectize(string phrase) {
     }
 }
 
-//string onlyConnectize(string phrase) {
-//    if(phrase.length() == 0) {
-//        return "";
-//    } else {
-//        char lastChar = toUpperCase(phrase[phrase.length() - 1]);
-
-
-
-//        if(isalpha(lastChar)) {
-//            switch (lastChar) {
-//            case 'A': case 'E': case 'I': case 'O': case 'U': case 'Y':
-//                return onlyConnectize(phrase.substr(0, phrase.length() - 1)) + "";
-//            default:
-//                break;
-//            }
-//        } else {
-//            return onlyConnectize(phrase.substr(0, phrase.length() - 1)) + "";
-//        }
-
-//        return onlyConnectize(phrase.substr(0, phrase.length() - 1)) + lastChar;
-//    }
-//}
-
-
-//string onlyConnectize(string phrase) { // gm
-//    if(phrase.length() == 0) {
-//        return "t";
-//    } else {
-//        char lastChar = toUpperCase(phrase[phrase.length() - 1]);
-//        if(isalpha(lastChar)) {
-//            switch (lastChar) {
-//            case 'A': case 'E': case 'I': case 'O': case 'U': case 'Y':
-
-//                break;
-//            default:
-//                break;
-//            }
-//        }
-
-//        return lastChar + onlyConnectize(phrase.substr(0, phrase.length() - 1));
-//    }
-//}
-
-
-
-
-
 /* * * * * * Test Cases * * * * * */
 
 ADD_TEST("Converts lower-case to upper-case.") {
