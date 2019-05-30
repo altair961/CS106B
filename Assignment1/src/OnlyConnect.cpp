@@ -63,7 +63,7 @@ ADD_TEST("Handles alphabetic but non-word input.") {
     EXPECT(onlyConnectize("EE 364A") == "");
 }
 
-ADD_TEST("Handles multiple-word input with paranthesis.") {
+ADD_TEST("Handles multiple-word input with parenthesis.") {
     EXPECT(onlyConnectize("Thank you, next (next)") == "THNKNXTNXT");
 }
 
