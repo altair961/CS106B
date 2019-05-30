@@ -14,18 +14,19 @@ string onlyConnectize(string phrase) {
     if(phrase.length() == 0) {
         return "";
     } else {
-        char lastChar = toUpperCase(phrase[phrase.length() - 1]);
+        string lastChar = "";
+        lastChar.push_back(toUpperCase(phrase[phrase.length() - 1]));
         string substr = phrase.substr(0, phrase.length() - 1);
-        if (isalpha(lastChar)) {
-            switch (lastChar) {
+        if (isalpha(lastChar[0])) {
+            switch (lastChar[0]) {
             case 'A': case 'E': case 'I': case 'O': case 'U': case 'Y':
-                lastChar = 0;
+                lastChar = "";
                 break;
             default:
                 break;
             }
         } else {
-            lastChar = 0;
+            lastChar = "";
         }
         return onlyConnectize(substr) + lastChar;
     }
@@ -49,6 +50,27 @@ ADD_TEST("Handles single-character inputs.") {
     EXPECT(onlyConnectize("Q") == "Q");
 }
 
+ADD_TEST("Handles two-word input.") {
+    EXPECT(onlyConnectize("Elena Kagan") == "LNKGN");
+    EXPECT(onlyConnectize("Antonin Scalia") == "NTNNSCL");
+}
+
+ADD_TEST("Handles multiple-word input.") {
+    EXPECT(onlyConnectize("For sale: baby shoes, never worn.") == "FRSLBBSHSNVRWRN");
+}
+
+ADD_TEST("Handles alphabetic but non-word input.") {
+    EXPECT(onlyConnectize("EE 364A") == "");
+}
+
+ADD_TEST("Handles multiple-word input with paranthesis.") {
+    EXPECT(onlyConnectize("Thank you, next (next)") == "THNKNXTNXT");
+}
+
+ADD_TEST("Handles multiple-word input with non-alphabetic symbols.") {
+    EXPECT(onlyConnectize("Annie Mae, My Sea Anemone Enemy!") == "NNMMSNMNNM");
+}
+
 /* TODO: You will need to add your own tests into this suite of test cases. Think about the sorts
  * of inputs we tested here, and, importantly, what sorts of inputs we *didn't* test here. Some
  * general rules of testing:
@@ -63,9 +85,3 @@ ADD_TEST("Handles single-character inputs.") {
  *
  * Happy testing!
  */
-
-
-
-
-
-
