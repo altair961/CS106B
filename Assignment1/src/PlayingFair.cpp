@@ -29,11 +29,6 @@ string bSequenceOfOrder(int n) {
     }
 }
 
-
-
-
-
-
 /* * * * * * Tests Below This Point * * * * * */
 
 ADD_TEST("Sequences of order 3 are correct.") {
@@ -48,6 +43,12 @@ ADD_TEST("Triggers error on negative inputs.") {
      */
     EXPECT_ERROR(aSequenceOfOrder(-137));
     EXPECT_ERROR(bSequenceOfOrder(-137));
+}
+
+ADD_TEST("Sequences of order 0 are correct.") {
+    /* Some very basic checks. */
+    EXPECT(aSequenceOfOrder(0) == "A");
+    EXPECT(bSequenceOfOrder(0) == "B");
 }
 
 /* TODO: You will need to add your own tests into this suite of test cases. Think about the sorts
