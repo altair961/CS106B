@@ -7,17 +7,26 @@
 using namespace std;
 
 void dropSandOn(Grid<int>& world, int row, int col) {
+//    string outputString = "";
+//    cout << "row" << row << endl
+//         << world.size() << endl
+//         << ;
+
+    if(!world.inBounds(row, col)) {//world.height() < row || world.width() < col) {
+    } else {
+
+
 //int i = 0;
-     if(world[row][col] < 3) { // base case
-         world[row][col] ++;
-         cout << endl
-              << "row 0: " << world[0][0] << " " << world[0][1] << " " << world[0][2] << endl;
-         cout << "row 1: " << world[1][0] << " " << world[1][1] << " " << world[1][2] << endl;
-         cout << "row 2: " << world[2][0] << " " << world[2][1] << " " << world[2][2] << endl;
+    if(world[row][col] < 3) { // base case
+        world[row][col] ++;
+        cout << endl
+             << "row 0: " << world[0][0] << " " << world[0][1] << " " << world[0][2] << endl;
+        cout << "row 1: " << world[1][0] << " " << world[1][1] << " " << world[1][2] << endl;
+        cout << "row 2: " << world[2][0] << " " << world[2][1] << " " << world[2][2] << endl;
 
   //       cout << "cell: " << world[row][col] << endl;
          //dropSandOn(world, row, col);
-     } else if(world[row][col] == 3) {
+    } else if(world[row][col] == 3) {
          world[row][col] ++;
          cout << endl
               << "row 0: " << world[0][0] << " " << world[0][1] << " " << world[0][2] << endl;
@@ -43,7 +52,7 @@ void dropSandOn(Grid<int>& world, int row, int col) {
 //     world[row][col]++;
 //     cout << "cell: " << world[row][col] << endl;
 //     i++;
-}
+}}
 
 
 
@@ -52,56 +61,72 @@ void dropSandOn(Grid<int>& world, int row, int col) {
 
 /* * * * * * Tests Below This Point * * * * * */
 
-//ADD_TEST("Dropping into an empty cell only changes that cell.") {
-//    /* Create a simple source grid. */
-//    Grid<int> before = {
-//        { 3, 3, 3 },
-//        { 3, 0, 3 },
-//        { 3, 3, 3 }
-//    };
-//    Grid<int> after = {
-//        { 3, 3, 3 },
-//        { 3, 1, 3 },
-//        { 3, 3, 3 }
-//    };
+ADD_TEST("Dropping into an empty cell only changes that cell.") {
+    /* Create a simple source grid. */
+    Grid<int> before = {
+        { 3, 3, 3 },
+        { 3, 0, 3 },
+        { 3, 3, 3 }
+    };
+    Grid<int> after = {
+        { 3, 3, 3 },
+        { 3, 1, 3 },
+        { 3, 3, 3 }
+    };
 
-//    dropSandOn(before, 1, 1);
-//    EXPECT(before == after); // The above call changes 'before.'
-//}
+    dropSandOn(before, 1, 1);
+    EXPECT(before == after); // The above call changes 'before.'
+}
 
-//ADD_TEST("Non-chaining topples work.") {
-//    /* Create a simple source grid. */
-//    Grid<int> before = {
-//        { 0, 0, 0 },
-//        { 1, 3, 1 },
-//        { 0, 2, 0 }
-//    };
-//    Grid<int> after = {
-//        { 0, 1, 0 },
-//        { 2, 0, 2 },
-//        { 0, 3, 0 }
-//    };
+ADD_TEST("Non-chaining topples work.") {
+    /* Create a simple source grid. */
+    Grid<int> before = {
+        { 0, 0, 0 },
+        { 1, 3, 1 },
+        { 0, 2, 0 }
+    };
+    Grid<int> after = {
+        { 0, 1, 0 },
+        { 2, 0, 2 },
+        { 0, 3, 0 }
+    };
 
-//    dropSandOn(before, 1, 1);
-//    EXPECT(before == after); // The above call changes 'before.'
-//}
+    dropSandOn(before, 1, 1);
+    EXPECT(before == after); // The above call changes 'before.'
+}
 
-//ADD_TEST("Two topples chain.") {
-//    /* Create a simple source grid. */
-//    Grid<int> before = {
-//        { 0, 0, 0, 0 },
-//        { 0, 3, 3, 0 },
-//        { 0, 0, 0, 0 }
-//    };
-//    Grid<int> after = {
-//        { 0, 1, 1, 0 },
-//        { 1, 1, 0, 1 },
-//        { 0, 1, 1, 0 }
-//    };
+ADD_TEST("Two topples chain.") {
+    /* Create a simple source grid. */
+    Grid<int> before = {
+        { 0, 0, 0, 0 },
+        { 0, 3, 3, 0 },
+        { 0, 0, 0, 0 }
+    };
+    Grid<int> after = {
+        { 0, 1, 1, 0 },
+        { 1, 1, 0, 1 },
+        { 0, 1, 1, 0 }
+    };
 
-//    dropSandOn(before, 1, 1);
-//    EXPECT(before == after); // The above call changes 'before.'
-//}
+    dropSandOn(before, 1, 1);
+    EXPECT(before == after); // The above call changes 'before.'
+}
+
+ADD_TEST("Dropping out of vector bounds.") {
+    Grid<int> before = {
+        { 0, 0, 0 },
+        { 1, 3, 1 },
+        { 0, 2, 0 }
+    };
+    Grid<int> after = {
+        { 0, 0, 0 },
+        { 1, 3, 1 },
+        { 0, 2, 0 }
+    };
+
+    dropSandOn(before, 3, 3);
+    EXPECT(before == after); // The above call doesn't change 'before.'
+}
 
 /* TODO: You will need to add your own tests into this suite of test cases. Think about the sorts
  * of inputs we tested here, and, importantly, what sorts of inputs we *didn't* test here. Some
