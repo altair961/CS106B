@@ -7,57 +7,23 @@
 using namespace std;
 
 void dropSandOn(Grid<int>& world, int row, int col) {
-//    string outputString = "";
-//    cout << "row" << row << endl
-//         << world.size() << endl
-//         << ;
+    if(!world.inBounds(row, col)) {
+        return;
+    }
 
-    if(!world.inBounds(row, col)) {//world.height() < row || world.width() < col) {
-    } else {
-
-
-//int i = 0;
     if(world[row][col] < 3) { // base case
         world[row][col] ++;
-        cout << endl
-             << "row 0: " << world[0][0] << " " << world[0][1] << " " << world[0][2] << endl;
-        cout << "row 1: " << world[1][0] << " " << world[1][1] << " " << world[1][2] << endl;
-        cout << "row 2: " << world[2][0] << " " << world[2][1] << " " << world[2][2] << endl;
-
-  //       cout << "cell: " << world[row][col] << endl;
-         //dropSandOn(world, row, col);
     } else if(world[row][col] == 3) {
-         world[row][col] ++;
-         cout << endl
-              << "row 0: " << world[0][0] << " " << world[0][1] << " " << world[0][2] << endl;
-         cout << "row 1: " << world[1][0] << " " << world[1][1] << " " << world[1][2] << endl;
-         cout << "row 2: " << world[2][0] << " " << world[2][1] << " " << world[2][2] << endl;
-
-//         cout << "cell: " << world[row][col] << endl;
-         dropSandOn(world, row, col);
-     }
-     else { // recoursive case
-         world[row][col] = 0;
-
-         cout << endl
-              << "row 0: " << world[0][0] << " " << world[0][1] << " " << world[0][2] << endl;
-         cout << "row 1: " << world[1][0] << " " << world[1][1] << " " << world[1][2] << endl;
-         cout << "row 2: " << world[2][0] << " " << world[2][1] << " " << world[2][2] << endl;
-
-         dropSandOn(world, row+1, col);
-         dropSandOn(world, row, col+1);
-         dropSandOn(world, row-1, col);
-         dropSandOn(world, row, col-1);
-     }
-//     world[row][col]++;
-//     cout << "cell: " << world[row][col] << endl;
-//     i++;
-}}
-
-
-
-
-
+        world[row][col] ++;
+        dropSandOn(world, row, col);
+    } else { // recoursive case
+        world[row][col] = 0;
+        dropSandOn(world, row+1, col);
+        dropSandOn(world, row, col+1);
+        dropSandOn(world, row-1, col);
+        dropSandOn(world, row, col-1);
+    }
+}
 
 /* * * * * * Tests Below This Point * * * * * */
 
