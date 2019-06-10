@@ -5,20 +5,50 @@
 #include "FleschKincaid.h"
 #include "Testing/FleschKincaidTests.h"
 #include <sstream> // For the stringstream type used in testing
+#include "tokenscanner.h"
+#include <cctype>
+
 using namespace std;
 
 DocumentInfo statisticsFor(istream& source) {
-    /* TODO: The next few lines just exist to make sure you don't get compiler warning messages
-     * when this function isn't implemented. Delete these lines, then implement this function.
-     */
-    (void) source;
-    return { 0, 0, 0 };
+    TokenScanner scanner(source);
+    scanner.ignoreWhitespace();
+    int numSentences = 0;
+    int numWords = 0;
+
+    while (scanner.hasMoreTokens()) {
+        string token = scanner.nextToken();
+
+        if(isalpha(token[0])) {
+            numWords ++;
+        } else if(token[0] == '.' || token[0] == '!' || token[0] == '?') {
+            numSentences ++;
+        }
+
+//        if(isalpha(token[0])) {
+//            switch (token[0]) {
+//            case '.': case '!': case '?':
+//                numSentences ++;
+//                cout << "numSentences: " << numSentences << endl;
+//                break;
+//            default:
+//                cout << "token " << numWords << ": " << token << endl;
+//                numWords ++;
+//                break;
+//            }
+//        }
+    }
+
+    cout << "numSentences: " << numSentences << endl;
+    cout << "numWords: " << numWords << endl;
+
+    DocumentInfo info;
+
+    info.numSentences = numSentences;
+    info.numWords = numWords;
+
+    return info;
 }
-
-
-
-
-
 
 /* * * * * * Test Cases * * * * * */
 
